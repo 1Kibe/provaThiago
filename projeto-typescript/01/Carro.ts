@@ -54,12 +54,23 @@ export class Carro {
 
   status(): string {
         return (
+            "\n"+
             "\nPLACA: " + this._placa +
             "\nMARCA: " + this._marca +
             "\nCOR: " + this._cor +
             "\nMODELO: " + this._modelo +
-            "\nQUILOMETRAGEM: " + this._quilometragem +
+            "\nQUILOMETRAGEM: " + this._quilometragem.toFixed(3) +
             "\nPROPRIETARIO: " + this._proprietario?.status()
+        );
+    }
+
+     statusMinimo(): string {
+        return (
+            "\n"+
+            "\nPLACA: " + this._placa +
+            "\nMARCA: " + this._marca +
+            "\nCOR: " + this._cor +
+            "\nMODELO: " + this._modelo 
         );
     }
 }

@@ -9,6 +9,7 @@ class Main {
     const simulacao = new Simulacao(radar);
 
     simulacao.Menu(); 
+
   }
 }
 

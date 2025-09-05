@@ -1,4 +1,5 @@
 import { Carro } from "./Carro.ts";
+import { Multas } from "./Multas.ts";
 import { TipoVia } from "./tipoVia.ts";
 import { Util } from "./util.ts";
 
@@ -43,19 +44,29 @@ export class Radar {
   public registrarVelocidade(carro: Carro) {
     const velocidade = Util.gerarVelocidadeCarro(this._velocidadeMaxima);
     const velocidadeMinima = this._velocidadeMaxima / 2;
+    const multa = new Multas(velocidade, this._velocidadeMaxima);
 
     let mensagem =
-      "\nMulta registrada: " +
+    "==============================================" +
+      "\n Multa registrada: " +
       "\nPLACA: " + carro.placa +
-      " - Velocidade: " + velocidade +
-      " km/h";
+      " - Velocidade: " + velocidade +" km/h" +
+      "\nMULTA: " + 
+      multa.status() +
+    "\n==============================================";
+
+    (carro as any).mensagemMulta = mensagem;
 
     if (velocidade > this._velocidadeMaxima || velocidade < velocidadeMinima) {
       this._multasRegistradas++;
       console.log(mensagem);
       this._carrosMultados.push(carro);//adiciona o carro multado na lista
     } else {
-      console.log("\n  Dentro do limite de velocidade: " + carro.placa + " - Velocidade: " + velocidade + " km/h");
+      console.log(
+        "==============================================" +
+        "\n  Dentro do limite de velocidade: " + carro.placa + " - Velocidade: " + velocidade + " km/h" +
+        "\n=============================================="
+      );
     }
   } 
 
@@ -70,5 +81,6 @@ export class Radar {
       "\nCARROS MULTADOS: [" + this._carrosMultados.map(carro => carro.placa).join(", ") + "]" + " }"
     );
   }
+
 
 }

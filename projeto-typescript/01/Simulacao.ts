@@ -17,7 +17,7 @@ export class Simulacao {
       const [carro] = Util.geradorDeEntidades(1);
 
       if (carro) {
-        console.log(carro.status());
+        console.log(carro.statusMinimo());
         this.radar.registrarVelocidade(carro);
       }
 
@@ -62,11 +62,13 @@ export class Simulacao {
                 break;
 
               case "3":
-                
                 if (this.radar.carrosMultados.length > 0) {
                   console.log("\n=== CARROS MULTADOS ===");
                   this.radar.carrosMultados.forEach((carro, index) => {
                     console.log(`\n#${index + 1}` + carro.status());
+                    if ((carro as any).mensagemMulta) {
+                      console.log((carro as any).mensagemMulta);
+                    }
                   });
                 } else {
                   console.log("\n Nenhum carro multado até agora.");
